@@ -190,54 +190,54 @@
             <h2>ACCESS.AI</h2>
         </div>
         <h1 class="login-title">Student Portal</h1>
-<<<<<<< Updated upstream
         <p class="login-subtitle">Sign in to access your localized telemetry and learning path.</p>
+
         <div style="width: 100%;">
-            <div class="input-group"><label>Email Address</label>
-                <div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email"
+            <div class="input-group"><label for="student-email">Email Address</label>
+                <div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input id="student-email" type="email"
                         placeholder="alex.researcher@university.edu" required></div>
             </div>
-            <div class="input-group"><label>Password</label>
-                <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="••••••••"
+            <div class="input-group"><label for="student-password">Password</label>
+                <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input id="student-password" type="password" placeholder="••••••••"
                         required></div>
             </div>
-            <div class="options"><label><input type="checkbox">Remember me</label><a href="#">Forgot password?</a></div>
+            <div class="options"><label><input type="checkbox" id="remember-me">Remember me</label><a href="#">Forgot password?</a></div>
 
             <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-                <button type="button" onclick="window.location.href='index.html'" class="btn-primary login-btn"
+                <button id="student-login-btn" type="button" class="btn-primary login-btn"
                     style="margin-bottom: 0; width: 100%;"><i class="fa-solid fa-user-graduate"></i> Login as
                     Student</button>
             </div>
+            <div style="display:flex; gap:8px; width:100%; justify-content:center;">
+                <button type="button" id="student-to-teacher" class="btn-primary" style="background: var(--bg-dark); border: 1px solid var(--border-light); color: var(--text-main); width: auto;">Educator Login</button>
+            </div>
         </div>
-=======
-        <p class="login-subtitle">Sign in to access your telemetry and learning insights.</p>
-            <button type="button" id="login-button" class="btn-primary login-btn">Student Panel</button>
-            <button type="button" id="teacher-view-button" class="btn-primary login-btn"
-                style="background: var(--bg-dark); border: 1px solid var(--border-light); color: var(--text-main); margin-top: -10px;">Educator
-                Panel</button>
->>>>>>> Stashed changes
+
         <div class="divider">OR CONTINUE WITH</div>
         <div class="social-login"><button class="btn-social"><i class="fa-brands fa-google"></i></button><button
                 class="btn-social"><i class="fa-brands fa-github"></i></button><button class="btn-social"><i
                     class="fa-brands fa-microsoft"></i></button></div>
     </div>
-<<<<<<< Updated upstream
-=======
 
     <script>
-        const loginHandler = (redirectUrl, role) => {
+        const loginHandler = (redirectUrl, role, email) => {
             const userMock = role === 'student'
-                ? { id: "student_001", email: "student@university.edu", role: "student", name: "Alex Researcher" }
-                : { id: "admin_001", email: "aman@university.edu", role: "teacher", name: "Aman Halkude" };
+                ? { id: "student_001", email: email || "student@university.edu", role: "student", name: "Alex Researcher" }
+                : { id: "teacher_001", email: "teacher@university.edu", role: "teacher", name: "Prof. Vrusha" };
 
             localStorage.setItem('activeUser', JSON.stringify(userMock));
             window.location.href = redirectUrl;
         };
 
-        document.getElementById('login-button').addEventListener('click', () => loginHandler('index.html', 'student'));
-        document.getElementById('teacher-view-button').addEventListener('click', () => loginHandler('teacher.html', 'teacher'));
+        document.getElementById('student-login-btn').addEventListener('click', () => {
+            const email = document.getElementById('student-email').value || 'student@university.edu';
+            loginHandler('index.html', 'student', email);
+        });
+
+        document.getElementById('student-to-teacher').addEventListener('click', () => {
+            window.location.href = 'teacher-login.html';
+        });
     </script>
->>>>>>> Stashed changes
 </body>
 
 </html>
