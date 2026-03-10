@@ -40,8 +40,8 @@ window.seedUsersIfEmpty = async () => {
         if (courseSnapshot.empty) {
             console.log("Seeding courses...");
             const mockCourses = [
-                { title: "Dynamic Programming Masterclass", instructor: "Alan Turing", progress: 30, totalModules: 10, completedModules: 3, estCompletionTime: "5 hrs", thumbnail: "purple-icon", aiRecommended: true, aiReason: "Recommended based on weak topic: Dynamic Programming" },
-                { title: "Introduction to Graph Theory", instructor: "Dr. Smith", progress: 100, totalModules: 8, completedModules: 8, estCompletionTime: "0 hrs (Completed)", thumbnail: "teal-icon", aiRecommended: false, aiReason: "" },
+                { title: "Dynamic Programming Masterclass", instructor: "Alan Turing", progress: 0, totalModules: 10, completedModules: 0, estCompletionTime: "5 hrs", thumbnail: "purple-icon", aiRecommended: true, aiReason: "Recommended based on weak topic: Dynamic Programming" },
+                { title: "Introduction to Graph Theory", instructor: "Dr. Smith", progress: 0, totalModules: 8, completedModules: 0, estCompletionTime: "4 hrs", thumbnail: "teal-icon", aiRecommended: false, aiReason: "" },
                 { title: "Advanced Data Structures", instructor: "Prof. Johnson", progress: 0, totalModules: 5, completedModules: 0, estCompletionTime: "3.5 hrs", thumbnail: "progress-icon", aiRecommended: true, aiReason: "High priority for next week's syllabus" }
             ];
             for (const c of mockCourses) await addDoc(coursesRef, c);
@@ -53,12 +53,12 @@ window.seedUsersIfEmpty = async () => {
         if (dashSnapshot.empty) {
             console.log("Seeding dashboard stats...");
             await addDoc(dashRef, {
-                predictedScore: 88,
-                riskLevel: "Low Risk",
-                courseCompletion: 74,
-                dailyTime: 4.2,
-                quizImp: "Constantly improving",
-                aiInsight: "Your recent focus on Graph Theory has significantly improved your projected score. We recommend reviewing Dynamic Programming in the courses below to boost your mastery.",
+                predictedScore: 75,
+                riskLevel: "Medium Risk",
+                courseCompletion: 0,
+                dailyTime: 0,
+                quizImp: "Awaiting first assessment",
+                aiInsight: "Welcome! Your learning path is ready. Start with the Dynamic Programming module below to begin improving your projected score.",
                 chartData: {
                     progressLabels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
                     progressScores: [65, 70, 72, 85, 88],
