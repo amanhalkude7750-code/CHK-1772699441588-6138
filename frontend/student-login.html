@@ -190,6 +190,7 @@
             <h2>ACCESS.AI</h2>
         </div>
         <h1 class="login-title">Student Portal</h1>
+<<<<<<< Updated upstream
         <p class="login-subtitle">Sign in to access your localized telemetry and learning path.</p>
         <div style="width: 100%;">
             <div class="input-group"><label>Email Address</label>
@@ -208,11 +209,35 @@
                     Student</button>
             </div>
         </div>
+=======
+        <p class="login-subtitle">Sign in to access your telemetry and learning insights.</p>
+            <button type="button" id="login-button" class="btn-primary login-btn">Student Panel</button>
+            <button type="button" id="teacher-view-button" class="btn-primary login-btn"
+                style="background: var(--bg-dark); border: 1px solid var(--border-light); color: var(--text-main); margin-top: -10px;">Educator
+                Panel</button>
+>>>>>>> Stashed changes
         <div class="divider">OR CONTINUE WITH</div>
         <div class="social-login"><button class="btn-social"><i class="fa-brands fa-google"></i></button><button
                 class="btn-social"><i class="fa-brands fa-github"></i></button><button class="btn-social"><i
                     class="fa-brands fa-microsoft"></i></button></div>
     </div>
+<<<<<<< Updated upstream
+=======
+
+    <script>
+        const loginHandler = (redirectUrl, role) => {
+            const userMock = role === 'student'
+                ? { id: "student_001", email: "student@university.edu", role: "student", name: "Alex Researcher" }
+                : { id: "admin_001", email: "aman@university.edu", role: "teacher", name: "Aman Halkude" };
+
+            localStorage.setItem('activeUser', JSON.stringify(userMock));
+            window.location.href = redirectUrl;
+        };
+
+        document.getElementById('login-button').addEventListener('click', () => loginHandler('index.html', 'student'));
+        document.getElementById('teacher-view-button').addEventListener('click', () => loginHandler('teacher.html', 'teacher'));
+    </script>
+>>>>>>> Stashed changes
 </body>
 
 </html>

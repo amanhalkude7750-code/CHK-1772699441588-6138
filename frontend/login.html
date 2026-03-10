@@ -191,30 +191,32 @@
         </div>
         <h1 class="login-title">Welcome Back</h1>
         <p class="login-subtitle">Sign in to access your telemetry and learning insights.</p>
-        <div style="width: 100%;">
-            <div class="input-group"><label>Email Address</label>
-                <div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email"
-                        placeholder="alex.researcher@university.edu" required></div>
-            </div>
-            <div class="input-group"><label>Password</label>
-                <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="••••••••"
-                        required></div>
-            </div>
-            <div class="options"><label><input type="checkbox">Remember me</label><a href="#">Forgot password?</a></div>
-
-            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-                <button type="button" onclick="window.location.href='index.html'" class="btn-primary login-btn"
-                    style="margin-bottom: 0;">Student Demo</button>
-                <button type="button" onclick="window.location.href='teacher.html'" class="btn-primary login-btn"
-                    style="margin-bottom: 0; background: rgba(0, 0, 0, 0.05); border: 1px solid var(--border-light); color: var(--text-main);">Teacher
-                    Demo</button>
-            </div>
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+            <button type="button" id="student-login-btn" class="btn-primary login-btn" style="margin-bottom: 0;">Student
+                Panel</button>
+            <button type="button" id="teacher-login-btn" class="btn-primary login-btn"
+                style="margin-bottom: 0; background: rgba(0, 0, 0, 0.05); border: 1px solid var(--border-light); color: var(--text-main);">Educator
+                Panel</button>
         </div>
         <div class="divider">OR CONTINUE WITH</div>
         <div class="social-login"><button class="btn-social"><i class="fa-brands fa-google"></i></button><button
                 class="btn-social"><i class="fa-brands fa-github"></i></button><button class="btn-social"><i
                     class="fa-brands fa-microsoft"></i></button></div>
     </div>
+
+    <script>
+        const loginHandler = (redirectUrl, role) => {
+            const userMock = role === 'student'
+                ? { id: "student_001", email: "student@university.edu", role: "student", name: "Alex Researcher" }
+                : { id: "admin_001", email: "aman@university.edu", role: "teacher", name: "Aman Halkude" };
+
+            localStorage.setItem('activeUser', JSON.stringify(userMock));
+            window.location.href = redirectUrl;
+        };
+
+        document.getElementById('student-login-btn').addEventListener('click', () => loginHandler('index.html', 'student'));
+        document.getElementById('teacher-login-btn').addEventListener('click', () => loginHandler('teacher.html', 'teacher'));
+    </script>
 </body>
 
 </html>
