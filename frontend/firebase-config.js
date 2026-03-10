@@ -31,7 +31,9 @@ window.seedUsersIfEmpty = async () => {
         if (userSnapshot.empty) {
             console.log("Seeding initial authentications...");
             await addDoc(usersRef, { id: "student_001", email: "student@university.edu", password: "password123", role: "student", name: "Alex Researcher" });
+            await addDoc(usersRef, { id: "student_002", email: "student2@university.edu", password: "password123", role: "student", name: "Jane Smith" });
             await addDoc(usersRef, { id: "prof_001", email: "teacher@university.edu", password: "admin", role: "teacher", name: "Prof. Johnson" });
+            await addDoc(usersRef, { id: "admin_001", email: "aman@university.edu", password: "aman", role: "teacher", name: "Aman Halkude" });
         }
 
         // Seed Courses
