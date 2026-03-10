@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESS.AI Analytics | Teacher Dashboard</title>
+    <!-- Modern Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h2>ACCESS.AI</h2>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-btn active"><i class="fa-solid fa-chart-column"></i> Class Insights</a>
+            <a href="#" class="nav-btn"><i class="fa-solid fa-users"></i> Students</a>
+            <a href="#" class="nav-btn"><i class="fa-solid fa-list-check"></i> Assignments</a>
+            <!-- Logout points to home.html as per requirements -->
+            <a href="home.html" class="nav-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Dashboard -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="topbar">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search students, metrics, alerts...">
+            </div>
+
+            <div class="user-profile">
+                <div class="notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge">5</span>
+                </div>
+
+                <div class="user-info">
+                    <span class="user-name">Prof. Johnson</span>
+                    <span class="user-role">Teacher PRO</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Welcome Banner / System Overview -->
+        <section class="banner glass-card" style="margin-bottom: 2rem;">
+            <div class="banner-text">
+                <h1>📚 Educator Dashboard, <span class="gradient-text">Prof. Johnson</span></h1>
+                <p><strong><i class="fa-solid fa-chalkboard-user"></i> Class Overview</strong><br>
+                    Monitor your cohort's learning progress, identify struggling students, and analyze engagement
+                    metrics dynamically.</p>
+            </div>
+            <div class="banner-illustration">
+                <div class="glow-orb"
+                    style="background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 70%);"></div>
+            </div>
+        </section>
+
+        <!-- Top Metrics Cards -->
+        <div>
+            <h2 style="margin-bottom: 1rem;"><i class="fa-solid fa-chart-pie"></i> Student Video Activity</h2>
+            <section class="metrics-grid">
+
+                <div class="metric-card glass-card top-metric">
+                    <div class="metric-icon purple-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="metric-data">
+                        <h3 id="metric-total-students">0</h3>
+                        <p>Students Watching Video</p>
+                        <small>Total Unique Viewers</small>
+                    </div>
+                </div>
+
+                <div class="metric-card glass-card top-metric">
+                    <div class="metric-icon teal-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="metric-data">
+                        <h3 id="metric-avg-watch-time">0s</h3>
+                        <p>Average Watch Time</p>
+                        <small class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> Live tracking</small>
+                    </div>
+                </div>
+
+                <div class="metric-card glass-card top-metric">
+                    <div class="metric-icon progress-icon"><i class="fa-solid fa-check-double"></i></div>
+                    <div class="metric-data">
+                        <h3 id="metric-completion-rate">0%</h3>
+                        <p>Video Completion Rate</p>
+                        <small class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> Course Progress</small>
+                    </div>
+                </div>
+
+                <div class="metric-card glass-card top-metric">
+                    <div class="metric-icon error-icon"
+                        style="color: var(--accent-red); background: rgba(244, 63, 94, 0.1);"><i
+                            class="fa-solid fa-fire"></i></div>
+                    <div class="metric-data" style="width: 100%;">
+                        <h3 id="metric-most-replayed">N/A</h3>
+                        <p>Most Replayed Video</p>
+                        <small>Peak Engagement</small>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- Dashboard Charts defined in teacher-script.js -->
+        <section class="dashboard-widgets" style="margin-top: 2rem;">
+
+            <!-- Topic Difficulty -->
+            <div class="widget glass-card widget-left">
+                <div class="widget-header">
+                    <h2><i class="fa-solid fa-ranking-star"></i> Topic Difficulty Analysis</h2>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                    <canvas id="topicDifficultyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Video Heatmap -->
+            <div class="widget glass-card widget-right">
+                <div class="widget-header">
+                    <h2><i class="fa-solid fa-fire"></i> Video Interaction Heatmap</h2>
+                    <span style="color: var(--text-muted); font-size: 0.8rem;">Lecture 4 Hotspots</span>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                    <canvas id="videoHeatmapChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Quiz Trends -->
+        <section class="dashboard-widgets" style="margin-top: 1.5rem;">
+            <div class="widget glass-card" style="width: 100%;">
+                <div class="widget-header">
+                    <h2><i class="fa-solid fa-chart-line"></i> Class Quiz Trends</h2>
+                    <span style="color: var(--text-muted); font-size: 0.8rem;">Progression over the semester</span>
+                </div>
+                <div class="chart-container" style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="quizTrendsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./teacher-script.js"></script>
+</body>
+
+</html>
