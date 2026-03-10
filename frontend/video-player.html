@@ -222,6 +222,7 @@
 
     <!-- YouTube Iframe API -->
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="./firebase-config.js"></script>
     <script>
         // Set dynamic title
         const params = new URLSearchParams(window.location.search);
@@ -298,11 +299,10 @@
         let pauseTracker;
 
         // Backend Event Sender
-        function sendVideoEvent(eventType) {
+        async function sendVideoEvent(eventType) {
             const time = player.getCurrentTime ? player.getCurrentTime() : 0;
             const eventPayload = {
                 student_id: studentId,
-
                 course_id: courseName,
                 video_id: videoId,
                 teacher_id: "Prof. Johnson",
@@ -311,13 +311,16 @@
                 timestamp: new Date().toISOString()
             };
 
-            fetch('https://chakravuyu-api.onrender.com/api/v1/video-events', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(eventPayload)
-            }).then(res => res.json())
-                .then(data => console.log('Video tracking synced:', data))
-                .catch(err => console.error('Tracking error:', err));
+            if (window.db) {
+                try {
+                    const docRef = await window.addDoc(window.collection(window.db, "video_events"), eventPayload);
+                    console.log('Video tracking synced to Firebase data:', docRef.id);
+                } catch (err) {
+                    console.error('Tracking error:', err);
+                }
+            } else {
+                console.error("Firebase not initialized");
+            }
         }
 
         // Simulate HTML5 listeners to fulfill requirement format strictly

@@ -233,30 +233,41 @@
         </div>
     </div>
 
+    <script type="module" src="./firebase-config.js"></script>
     <script>
+        // Seed database if it's the very first time
+        setTimeout(() => { if (window.seedUsersIfEmpty) window.seedUsersIfEmpty(); }, 1500);
+
         document.getElementById('login-button').addEventListener('click', async () => {
             const email = document.querySelector('input[type="email"]').value;
             const password = document.querySelector('input[type="password"]').value;
             const errorMsg = document.getElementById('error-message');
 
             try {
-                const response = await fetch('http://localhost:3000/api/v1/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password, role: 'teacher' })
-                });
+                if (!window.db) {
+                    errorMsg.textContent = "Connecting to database... try again in a second.";
+                    errorMsg.style.display = 'block';
+                    return;
+                }
 
-                const data = await response.json();
+                // Query Firebase directly
+                const usersRef = window.collection(window.db, "users");
+                const q = window.query(usersRef, window.where("email", "==", email), window.where("password", "==", password), window.where("role", "==", "teacher"));
+                const querySnapshot = await window.getDocs(q);
 
-                if (data.success) {
-                    localStorage.setItem('activeUser', JSON.stringify(data.user));
+                if (!querySnapshot.empty) {
+                    let userDoc = querySnapshot.docs[0].data();
+                    const { password, ...safeUser } = userDoc;
+
+                    localStorage.setItem('activeUser', JSON.stringify(safeUser));
                     window.location.href = 'teacher.html';
                 } else {
-                    errorMsg.textContent = data.message;
+                    errorMsg.textContent = "Invalid educator email or password";
                     errorMsg.style.display = 'block';
                 }
             } catch (err) {
-                errorMsg.textContent = "Cannot connect to server.";
+                console.error(err);
+                errorMsg.textContent = "Cannot connect to database.";
                 errorMsg.style.display = 'block';
             }
         });
