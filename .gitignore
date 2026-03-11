@@ -1,1 +1,8 @@
 .vercel
+node_modules/
+dist/
+.env
+.DS_Store
+accessibility-portal-src/node_modules/
+accessibility-portal-src/dist/
+Access-ai-main/
