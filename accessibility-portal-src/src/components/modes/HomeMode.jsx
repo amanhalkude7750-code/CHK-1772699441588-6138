@@ -2,11 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Changed from useMode
 import { MODES } from '../../constants/modes';
 import { Ear, Eye, Activity, ArrowRight, Zap, Shield, Heart } from 'lucide-react';
-import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
 
 const HomeMode = () => {
     const navigate = useNavigate(); // Replaces switchMode
-    const { transcript, isListening, startListening, stopListening, hasSupport } = useSpeechRecognition();
 
     const goToMode = React.useCallback((mode) => {
         switch (mode) {
@@ -33,12 +31,10 @@ const HomeMode = () => {
         // Speak intro after a short delay to ensure browser allows it
         const introTimer = setTimeout(() => {
             speak(welcomeMessage);
-            startListening(true); // Continuous = true
         }, 800);
 
         const handleInteraction = () => {
-            // Ensure AudioContext is unlocked for both Mic and TTS
-            if (!isListening) startListening(true);
+            // Placeholder for any interaction-based audio unlocks if needed
         };
 
         const handleKeyDown = (e) => {
@@ -75,47 +71,13 @@ const HomeMode = () => {
             clearTimeout(introTimer);
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('click', handleInteraction);
-            stopListening(); // Important: Stop the continuous loop on unmount
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel(); // Stop talking if we leave the page
             }
         };
-    }, [goToMode, startListening, stopListening]);
+    }, [goToMode]);
 
-    // VOICE COMMAND PARSER (ALEXA STYLE)
-    React.useEffect(() => {
-        if (!transcript) return;
 
-        // Simple logic: If pause is detected or specific keywords found, execute.
-        const cmd = transcript.toLowerCase();
-
-        // We only act if the command is "complete" enough or contains "mode"
-        // In a real Alexa app, we'd wait for silence, but here we scan stream.
-
-        const speakAndSwitch = (msg, mode) => {
-            stopListening(); // Stop listening so we don't hear ourself
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(msg);
-                utterance.onend = () => goToMode(mode);
-                window.speechSynthesis.speak(utterance);
-            } else {
-                goToMode(mode);
-            }
-        };
-
-        if (cmd.includes("blind mode") || (cmd.includes("activate") && cmd.includes("blind"))) {
-            console.log("Command Recognized: BLIND");
-            speakAndSwitch("Okay, activating Blind Mode.", MODES.BLIND);
-        }
-        else if (cmd.includes("sign mode") || cmd.includes("deaf mode") || cmd.includes("translate")) {
-            console.log("Command Recognized: DEAF");
-            speakAndSwitch("Understood. Opening Sign Language Translation.", MODES.DEAF);
-        }
-        else if (cmd.includes("motor mode") || cmd.includes("pilot mode") || cmd.includes("head tracking")) {
-            console.log("Command Recognized: MOTOR");
-            speakAndSwitch("Sure. Initializing Head Tracking Interface.", MODES.MOTOR);
-        }
-    }, [transcript, goToMode, stopListening, startListening]);
 
     const ModeCard = ({ mode, title, subtitle, icon: Icon, colorClass, delay }) => (
         <button
@@ -162,11 +124,6 @@ const HomeMode = () => {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 border border-black/10 mb-8 animate-in fade-in zoom-in duration-700">
                         <Zap size={16} className="text-yellow-600 fill-yellow-600" />
                         <span className="text-sm font-bold text-gray-700 tracking-wide">ACCESS AI · HACKATHON BUILD</span>
-                        {isListening && (
-                            <span className="flex items-center gap-2 ml-4 text-red-600 animate-pulse border-l border-black/10 pl-4">
-                                🔴 Listening for commands...
-                            </span>
-                        )}
                     </div>
                     <h1 className="text-6xl md:text-7xl font-black text-black mb-8 tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-black to-gray-600">
                         Bridge the gap.<br />
