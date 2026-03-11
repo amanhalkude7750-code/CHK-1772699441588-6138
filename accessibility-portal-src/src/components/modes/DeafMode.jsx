@@ -5,6 +5,8 @@ import { ArrowLeft, RefreshCw, X, ArrowRight, Volume2, Mic, MicOff, AlertCircle 
 import { useHandSignRecognition } from '../../hooks/useHandSignRecognition';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
 import { reconstructSentence } from '../../services/TranslationService';
+import ModeAnalysis from '../shared/ModeAnalysis';
+import { Target, TrendingUp, Zap, Clock, UserCheck } from 'lucide-react';
 
 const DeafMode = () => {
     // Refs
@@ -228,7 +230,7 @@ const DeafMode = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-2"><ArrowRight className="rotate-90 text-gray-400" /></div>
-                    <div className="flex-1 bg-blue-50 rounded-2xl p-6 border border-blue-200 flex flex-col items-center justify-center text-center relative">
+                    <div className="flex-1 bg-blue-50 rounded-2xl p-6 border border-blue-200 flex flex-col items-center justify-center text-center relative mb-6">
                         {isTranslating && <div className="absolute top-4 right-4 text-blue-600 animate-spin"><RefreshCw size={18} /></div>}
                         {translationError ? (
                             <div className="flex flex-col items-center text-yellow-600 animate-pulse">
@@ -242,6 +244,18 @@ const DeafMode = () => {
                             </>
                         )}
                     </div>
+
+                    {/* Student Analysis Panel */}
+                    <ModeAnalysis 
+                        modeName="Deaf-Mute Translation"
+                        colorClass="border-blue-400"
+                        metrics={[
+                            { label: "SIGN ACCURACY", value: 92, unit: "%", progress: 92, icon: <Target className="text-blue-600" size={14} /> },
+                            { label: "TRANSLATION SPEED", value: 1.2, unit: "s", progress: 85, icon: <Clock className="text-blue-600" size={14} /> },
+                            { label: "ENGAGEMENT", value: 88, unit: "%", progress: 88, icon: <Zap className="text-blue-600" size={14} /> },
+                            { label: "VOCABULARY", value: 42, unit: "words", progress: 60, icon: <UserCheck className="text-blue-600" size={14} /> }
+                        ]}
+                    />
                 </div>
             </div>
         </div>

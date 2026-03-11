@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Volume2, Mic, SkipBack, SkipForward } from 'lucide-react';
+import { ArrowLeft, Volume2, Mic, SkipBack, SkipForward, Target, Zap, Clock, UserCheck } from 'lucide-react';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
+import ModeAnalysis from '../shared/ModeAnalysis';
 
 const LESSON_CONTENT = [
     { id: 1, text: "Welcome to Voice Navigator. I am your guide. Say 'Next' to continue." },
@@ -101,12 +102,28 @@ const BlindMode = () => {
                     {isPlaying ? <Volume2 size={80} className="animate-bounce" /> : <Mic size={80} className={isListening ? "text-red-600" : "text-gray-400"} />}
                 </div>
 
-                {/* Text Display (for sighted assistants/debug) */}
-                <div className="max-w-2xl">
-                    <h2 className="text-xl text-gray-500 mb-4 uppercase">Current Section ({currentSection + 1}/{LESSON_CONTENT.length})</h2>
-                    <p className="text-4xl md:text-5xl font-bold text-black leading-relaxed">
-                        {LESSON_CONTENT[currentSection].text}
-                    </p>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 w-full max-w-7xl items-start">
+                    {/* Text Display (for sighted assistants/debug) */}
+                    <div className="lg:col-span-2 text-center lg:text-left flex flex-col justify-center h-full">
+                        <h2 className="text-xl text-gray-500 mb-4 uppercase tracking-widest font-black">Current Section ({currentSection + 1}/{LESSON_CONTENT.length})</h2>
+                        <p className="text-4xl md:text-6xl font-black text-black leading-[1.1] tracking-tighter">
+                            {LESSON_CONTENT[currentSection].text}
+                        </p>
+                    </div>
+
+                    {/* Student Analysis Side Panel */}
+                    <div className="hidden lg:block">
+                        <ModeAnalysis 
+                            modeName="Voice Navigator"
+                            colorClass="border-black"
+                            metrics={[
+                                { label: "CMD RECOGNITION", value: 95, unit: "%", progress: 95, icon: <Target size={14} /> },
+                                { label: "NAVIGATION FLOW", value: "Smooth", unit: "", progress: 90, icon: <Zap size={14} /> },
+                                { label: "INTERACTION TIME", value: 3.4, unit: "m", progress: 75, icon: <Clock size={14} /> },
+                                { label: "MASTERY LEVEL", value: 4, unit: "/5", progress: 80, icon: <UserCheck size={14} /> }
+                            ]}
+                        />
+                    </div>
                 </div>
 
                 {/* Feedback Log */}

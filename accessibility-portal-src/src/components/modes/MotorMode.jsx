@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Crosshair, Move } from 'lucide-react';
 import { useHeadTracking } from '../../hooks/useHeadTracking';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
+import ModeAnalysis from '../shared/ModeAnalysis';
+import { Target, Zap, Clock, UserCheck } from 'lucide-react';
 
 const MotorMode = () => {
     const { cursor, isTracking, setIsTracking, gesture } = useHeadTracking();
@@ -312,6 +314,20 @@ const MotorMode = () => {
                     <p className="p-6 border border-cyan-100 rounded-lg bg-cyan-50/50 hover:bg-cyan-50 transition duration-300">
                         This interface is designed for high-precision, hands-free operation. The HUD below confirms your every intent.
                     </p>
+                </div>
+
+                {/* Pilot Performance Analysis */}
+                <div className="mt-12">
+                    <ModeAnalysis 
+                        modeName="Pilot Control Interface"
+                        colorClass="border-cyan-500"
+                        metrics={[
+                            { label: "DWELL PRECISION", value: 88, unit: "%", progress: 88, icon: <Target className="text-cyan-600" size={14} /> },
+                            { label: "GESTURE RELIABILITY", value: 94, unit: "%", progress: 94, icon: <Zap className="text-cyan-600" size={14} /> },
+                            { label: "SYSTEM EFFICIENCY", value: 1.8, unit: "ops/m", progress: 70, icon: <Clock className="text-cyan-600" size={14} /> },
+                            { label: "NEURAL SYNC", value: 76, unit: "%", progress: 76, icon: <UserCheck className="text-cyan-600" size={14} /> }
+                        ]}
+                    />
                 </div>
             </main>
 
