@@ -14,6 +14,7 @@ function App() {
     <div className="min-h-screen bg-white text-black">
       <Routes>
         <Route path="/" element={<HomeMode />} />
+        <Route path="/index.html" element={<HomeMode />} />
         <Route path="/deaf" element={<DeafMode />} />
         <Route path="/deaf/learn" element={<DeafLearnMode />} />
         <Route path="/blind" element={<BlindMode />} />

@@ -189,11 +189,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     label: 'Avg Score (%)',
                     data: [82, 75, 65, 48, 38], // Showing Graphs and DP as visibly difficult
                     backgroundColor: [
-                        'rgba(34, 197, 94, 0.6)', // Green (Good)
-                        'rgba(59, 130, 246, 0.6)', // Blue
-                        'rgba(249, 115, 22, 0.6)', // Orange
-                        'rgba(244, 63, 94, 0.6)', // Red (Bad)
-                        'rgba(244, 63, 94, 0.9)'  // Deep Red (Worse)
+                        'rgba(0, 0, 0, 0.2)',
+                        'rgba(0, 0, 0, 0.4)',
+                        'rgba(0, 0, 0, 0.6)',
+                        'rgba(0, 0, 0, 0.8)',
+                        'rgba(0, 0, 0, 1.0)'
                     ],
                     borderRadius: 4
                 }]
@@ -233,8 +233,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (quizCanvas) {
         const ctxQuiz = quizCanvas.getContext('2d');
         const gradientLine = ctxQuiz.createLinearGradient(0, 0, 0, 400);
-        gradientLine.addColorStop(0, 'rgba(20, 184, 166, 0.5)'); // Teal
-        gradientLine.addColorStop(1, 'rgba(20, 184, 166, 0.0)');
+        gradientLine.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
+        gradientLine.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
 
         new Chart(ctxQuiz, {
             type: 'line',
@@ -245,11 +245,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     data: [60, 65, 72, 70, 80], // Trending upwards
                     fill: true,
                     backgroundColor: gradientLine,
-                    borderColor: '#14b8a6', // Teal
+                    borderColor: '#333333',
                     borderWidth: 3,
                     tension: 0.4,
                     pointBackgroundColor: '#fff',
-                    pointBorderColor: '#14b8a6',
+                    pointBorderColor: '#000000',
                     pointRadius: 4
                 }]
             },
@@ -304,8 +304,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     // Render Chart
                     const ctxVideo = videoCanvas.getContext('2d');
                     const gradientHot = ctxVideo.createLinearGradient(0, 0, 0, 200);
-                    gradientHot.addColorStop(0, 'rgba(244, 63, 94, 0.8)');
-                    gradientHot.addColorStop(1, 'rgba(244, 63, 94, 0.0)');
+                    gradientHot.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
+                    gradientHot.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
 
                     new Chart(ctxVideo, {
                         type: 'line',
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 data: frictionScores,
                                 fill: true,
                                 backgroundColor: gradientHot,
-                                borderColor: '#f43f5e',
+                                borderColor: '#000000',
                                 borderWidth: 2,
                                 tension: 0.3,
                                 pointRadius: 2,

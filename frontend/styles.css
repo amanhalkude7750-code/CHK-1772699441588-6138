@@ -1,27 +1,27 @@
 /* --- Base Defaults & CSS Variables --- */
 :root {
-    --bg-dark: #fafafa;
-    --bg-panel: rgba(255, 255, 255, 0.7);
-    --border-light: rgba(0, 0, 0, 0.1);
+    --bg-dark: #ffffff;
+    --bg-panel: #ffffff;
+    --border-light: #000000;
 
-    --text-main: #111111;
-    --text-muted: #555555;
+    --text-main: #000000;
+    --text-muted: #222222;
 
-    --accent-blue: #3b82f6;
-    --accent-purple: #8b5cf6;
-    --accent-teal: #14b8a6;
-    --accent-orange: #f97316;
-    --accent-red: #f43f5e;
-    --accent-green: #22c55e;
+    --accent-blue: #000000;
+    --accent-purple: #222222;
+    --accent-teal: #000000;
+    --accent-orange: #222222;
+    --accent-red: #000000;
+    --accent-green: #222222;
 
-    --grad-primary: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
-    --grad-purple: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    --grad-primary: linear-gradient(135deg, #222222 0%, #000000 100%);
+    --grad-purple: linear-gradient(135deg, #444444 0%, #111111 100%);
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
 
-    --glass-blur: blur(12px);
-    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-blur: blur(0px);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -37,19 +37,14 @@ body {
     display: flex;
     min-height: 100vh;
     overflow-x: hidden;
-    background-image:
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
 }
 
 body.teacher-mode {
-    background-image:
-        radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 60%, rgba(249, 115, 22, 0.08) 0%, transparent 50%);
+    background-color: var(--bg-dark);
 }
 
 .gradient-text-orange {
-    background: linear-gradient(135deg, var(--accent-orange) 0%, #facc15 100%);
+    background: linear-gradient(135deg, #666666 0%, #222222 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -125,8 +120,8 @@ h4 {
 }
 
 .logo-icon.teacher-icon {
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-teal) 100%);
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    background: linear-gradient(135deg, #444444 0%, #111111 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .logo h2 {
@@ -172,8 +167,8 @@ h4 {
 
 .nav-btn.active-teacher {
     color: white;
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    background: linear-gradient(135deg, #444444 0%, #000000 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-promo {
@@ -286,7 +281,7 @@ h4 {
 }
 
 .teacher-banner {
-    border-left: 4px solid var(--accent-orange);
+    border-left: 4px solid var(--text-main);
 }
 
 /* Base Metrics Grid */
@@ -315,27 +310,27 @@ h4 {
 }
 
 .progress-icon {
-    background: rgba(139, 92, 246, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-purple);
 }
 
 .time-icon {
-    background: rgba(59, 130, 246, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-blue);
 }
 
 .teal-icon {
-    background: rgba(20, 184, 166, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-teal);
 }
 
 .purple-icon {
-    background: rgba(139, 92, 246, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-purple);
 }
 
 .blue-icon {
-    background: rgba(59, 130, 246, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-blue);
 }
 
@@ -371,15 +366,15 @@ h4 {
 }
 
 .good-tag {
-    background: rgba(34, 197, 94, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-green);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .bad-tag {
-    background: rgba(244, 63, 94, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-red);
-    border: 1px solid rgba(244, 63, 94, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Dashboard Widgets Split */
@@ -574,12 +569,12 @@ h4 {
 }
 
 .high-risk {
-    background: rgba(244, 63, 94, 0.15);
+    background: rgba(0, 0, 0, 0.1);
     color: var(--accent-red);
 }
 
 .med-risk {
-    background: rgba(249, 115, 22, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--accent-orange);
 }
 
@@ -648,7 +643,7 @@ h4 {
 }
 
 .ai-tag {
-    background: rgba(244, 63, 94, 0.2);
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
 }
 
