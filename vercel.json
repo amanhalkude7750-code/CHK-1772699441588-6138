@@ -5,6 +5,14 @@
       "destination": "/frontend/home.html"
     },
     {
+      "source": "/accessibility-portal/assets/(.*)",
+      "destination": "/frontend/accessibility-portal/assets/$1"
+    },
+    {
+      "source": "/accessibility-portal/(.*)",
+      "destination": "/frontend/accessibility-portal/index.html"
+    },
+    {
       "source": "/:path*",
       "destination": "/frontend/:path*"
     }
